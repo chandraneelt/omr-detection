@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "frontend/build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/health",
+      "dest": "/api/health.js"
+    },
+    {
+      "src": "/api/templates",
+      "dest": "/api/templates.js"
+    },
+    {
+      "src": "/api/scan",
+      "dest": "/api/scan.js"
+    },
+    {
+      "src": "/api/history",
+      "dest": "/api/history.js"
+    },
+    {
+      "src": "/api/export/(.*)",
+      "dest": "/api/export.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

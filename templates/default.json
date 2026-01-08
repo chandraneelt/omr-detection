@@ -1,0 +1,27 @@
+{
+  "display_name": "Standard 20 Questions (A-D)",
+  "questions": 20,
+  "options": ["A", "B", "C", "D"],
+  "layout": {
+    "type": "vertical",
+    "bubble_size": {
+      "width": 30,
+      "height": 20
+    },
+    "spacing": {
+      "question": 40,
+      "option": 80
+    },
+    "margins": {
+      "top": 150,
+      "left": 100,
+      "right": 100,
+      "bottom": 100
+    }
+  },
+  "detection": {
+    "fill_threshold": 0.3,
+    "min_contour_area": 100,
+    "max_contour_area": 2000
+  }
+}

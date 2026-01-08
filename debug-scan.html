@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OMR Scanner Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 5px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>OMR Scanner API Debug</h1>
+    
+    <div id="status" class="status info">Ready to test...</div>
+    
+    <button onclick="testHealth()">Test Health</button>
+    <button onclick="testTemplates()">Test Templates</button>
+    <button onclick="testScan()">Test Scan (No Image)</button>
+    <button onclick="clearResults()">Clear</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function showResults(title, data) {
+            const results = document.getElementById('results');
+            results.innerHTML = `<h3>${title}</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+        
+        async function testHealth() {
+            updateStatus('Testing health endpoint...', 'info');
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('✅ Health check successful!', 'success');
+                    showResults('Health Check Response', data);
+                } else {
+                    updateStatus(`❌ Health check failed: ${response.status}`, 'error');
+                    showResults('Health Check Error', data);
+                }
+            } catch (error) {
+                updateStatus(`❌ Health check error: ${error.message}`, 'error');
+                showResults('Health Check Error', { error: error.message });
+            }
+        }
+        
+        async function testTemplates() {
+            updateStatus('Testing templates endpoint...', 'info');
+            try {
+                const response = await fetch(`${API_BASE}/templates`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus(`✅ Templates loaded: ${data.templates?.length || 0} templates`, 'success');
+                    showResults('Templates Response', data);
+                } else {
+                    updateStatus(`❌ Templates failed: ${response.status}`, 'error');
+                    showResults('Templates Error', data);
+                }
+            } catch (error) {
+                updateStatus(`❌ Templates error: ${error.message}`, 'error');
+                showResults('Templates Error', { error: error.message });
+            }
+        }
+        
+        async function testScan() {
+            updateStatus('Testing scan endpoint (no image)...', 'info');
+            try {
+                const formData = new FormData();
+                formData.append('template', 'default');
+                formData.append('answer_key', '["A", "B", "C", "D", "A", "B", "C", "D", "A", "B", "C", "D", "A", "B", "C", "D", "A", "B", "C", "D"]');
+                
+                const response = await fetch(`${API_BASE}/scan`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus(`✅ Scan successful! Score: ${data.score}/${data.total_questions}`, 'success');
+                    showResults('Scan Response', data);
+                } else {
+                    updateStatus(`❌ Scan failed: ${response.status}`, 'error');
+                    showResults('Scan Error', data);
+                }
+            } catch (error) {
+                updateStatus(`❌ Scan error: ${error.message}`, 'error');
+                showResults('Scan Error', { error: error.message });
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            updateStatus('Ready to test...', 'info');
+        }
+        
+        // Auto-test health on load
+        window.onload = () => {
+            setTimeout(testHealth, 1000);
+        };
+    </script>
+</body>
+</html>

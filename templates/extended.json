@@ -1,0 +1,27 @@
+{
+  "display_name": "Extended 50 Questions (A-E)",
+  "questions": 50,
+  "options": ["A", "B", "C", "D", "E"],
+  "layout": {
+    "type": "vertical",
+    "bubble_size": {
+      "width": 25,
+      "height": 18
+    },
+    "spacing": {
+      "question": 30,
+      "option": 60
+    },
+    "margins": {
+      "top": 120,
+      "left": 80,
+      "right": 80,
+      "bottom": 80
+    }
+  },
+  "detection": {
+    "fill_threshold": 0.25,
+    "min_contour_area": 80,
+    "max_contour_area": 1500
+  }
+}

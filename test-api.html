@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OMR API Test</title>
+</head>
+<body>
+    <h1>OMR API Test</h1>
+    <button onclick="testHealth()">Test Health</button>
+    <button onclick="testTemplates()">Test Templates</button>
+    <div id="results"></div>
+
+    <script>
+        async function testHealth() {
+            try {
+                const response = await fetch('http://localhost:5000/api/health');
+                const data = await response.json();
+                document.getElementById('results').innerHTML = '<h3>Health Check:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('results').innerHTML = '<h3>Health Check Error:</h3><pre>' + error.message + '</pre>';
+            }
+        }
+
+        async function testTemplates() {
+            try {
+                const response = await fetch('http://localhost:5000/api/templates');
+                const data = await response.json();
+                document.getElementById('results').innerHTML = '<h3>Templates:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('results').innerHTML = '<h3>Templates Error:</h3><pre>' + error.message + '</pre>';
+            }
+        }
+    </script>
+</body>
+</html>

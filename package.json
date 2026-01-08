@@ -1,0 +1,11 @@
+{
+  "name": "omr-scanner",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build"
+  },
+  "dependencies": {
+    "formidable": "^3.5.1"
+  },
+  "devDependencies": {}
+}

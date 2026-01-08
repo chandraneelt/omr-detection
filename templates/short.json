@@ -1,0 +1,27 @@
+{
+  "display_name": "Short 10 Questions (A-C)",
+  "questions": 10,
+  "options": ["A", "B", "C"],
+  "layout": {
+    "type": "vertical",
+    "bubble_size": {
+      "width": 35,
+      "height": 25
+    },
+    "spacing": {
+      "question": 50,
+      "option": 90
+    },
+    "margins": {
+      "top": 150,
+      "left": 120,
+      "right": 120,
+      "bottom": 150
+    }
+  },
+  "detection": {
+    "fill_threshold": 0.35,
+    "min_contour_area": 120,
+    "max_contour_area": 2500
+  }
+}

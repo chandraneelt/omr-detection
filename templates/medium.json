@@ -1,0 +1,27 @@
+{
+  "display_name": "Medium 30 Questions (A-D)",
+  "questions": 30,
+  "options": ["A", "B", "C", "D"],
+  "layout": {
+    "type": "vertical",
+    "bubble_size": {
+      "width": 28,
+      "height": 18
+    },
+    "spacing": {
+      "question": 32,
+      "option": 70
+    },
+    "margins": {
+      "top": 130,
+      "left": 90,
+      "right": 90,
+      "bottom": 100
+    }
+  },
+  "detection": {
+    "fill_threshold": 0.28,
+    "min_contour_area": 90,
+    "max_contour_area": 1800
+  }
+}

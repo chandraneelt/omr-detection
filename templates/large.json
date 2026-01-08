@@ -1,0 +1,27 @@
+{
+  "display_name": "Large 100 Questions (A-E)",
+  "questions": 100,
+  "options": ["A", "B", "C", "D", "E"],
+  "layout": {
+    "type": "vertical",
+    "bubble_size": {
+      "width": 20,
+      "height": 15
+    },
+    "spacing": {
+      "question": 18,
+      "option": 50
+    },
+    "margins": {
+      "top": 100,
+      "left": 70,
+      "right": 70,
+      "bottom": 80
+    }
+  },
+  "detection": {
+    "fill_threshold": 0.25,
+    "min_contour_area": 60,
+    "max_contour_area": 1200
+  }
+}
