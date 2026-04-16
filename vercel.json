@@ -1,38 +1,13 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/health",
-      "dest": "/api/health.js"
-    },
-    {
-      "src": "/api/templates",
-      "dest": "/api/templates.js"
-    },
-    {
-      "src": "/api/scan",
-      "dest": "/api/scan.js"
-    },
-    {
-      "src": "/api/history",
-      "dest": "/api/history.js"
-    },
-    {
-      "src": "/api/export/(.*)",
-      "dest": "/api/export.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+  "buildCommand": "npm --prefix frontend install && npm --prefix frontend run build",
+  "outputDirectory": "frontend/build",
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/health" },
+    { "source": "/api/templates", "destination": "/api/templates" },
+    { "source": "/api/scan", "destination": "/api/scan" },
+    { "source": "/api/history", "destination": "/api/history" },
+    { "source": "/api/export/:scanId/:format", "destination": "/api/export/[...params]" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
