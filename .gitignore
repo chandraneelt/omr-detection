@@ -10,6 +10,8 @@ __pycache__/
 # Build outputs
 frontend/build/
 frontend/dist/
+build/
+dist/
 
 # Environment files
 .env
@@ -83,7 +85,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public  (commented out - we need this folder for React)
 
 # Storybook build outputs
 .out

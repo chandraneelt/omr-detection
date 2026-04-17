@@ -1,13 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm --prefix frontend install && npm --prefix frontend run build",
-  "outputDirectory": "frontend/build",
   "rewrites": [
-    { "source": "/api/health", "destination": "/api/health" },
-    { "source": "/api/templates", "destination": "/api/templates" },
-    { "source": "/api/scan", "destination": "/api/scan" },
-    { "source": "/api/history", "destination": "/api/history" },
-    { "source": "/api/export/:scanId/:format", "destination": "/api/export/[...params]" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)",     "destination": "/index.html" }
   ]
 }
